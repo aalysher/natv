@@ -64,6 +64,9 @@ class Order(models.Model):
                               choices=statuses,
                               default='Open')
 
+    def __str__(self):
+        return self.name
+
 
 class OrderDetail(models.Model):
     """Детали операции"""
@@ -78,3 +81,6 @@ class Day(models.Model):
     order = models.ForeignKey(OrderDetail,
                               on_delete=models.DO_NOTHING)
     day = models.DateField()
+
+    def __str__(self):
+        return str(self.day)
