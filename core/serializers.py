@@ -19,6 +19,13 @@ class ChannelSerializer(serializers.Serializer):
     discount = DiscountSerializer(many=True)
 
 
+def validate_day_format(days):
+    for day_string in days:
+        try:
+            datetime.strptime(day_string, '%d.%m.%Y')
+        except:
+            raise serializers.ValidationError('Incorrect data format, should be DD-MM-YYYY')
+
 
 class ChannelPostSerializer(serializers.Serializer):
     channel_id = serializers.IntegerField()
@@ -39,21 +46,16 @@ class OrderSerializer(serializers.Serializer):
                                      name=validated_data['name'],
                                      phone=validated_data['phone'],
                                      email=validated_data['email'],
-                                     total_price=validated_data['total_price']
-                                     )
+                                     total_price=validated_data['total_price'])
 
         for i in validated_data['channels']:
             channel = Channel.objects.get(pk=i['channel_id'])
-            ord_detail = OrderDetail.objects.create(
-                channel=channel,
-                order=order,
-                price=i['price']
-            )
+            ord_detail = OrderDetail.objects.create(channel=channel,
+                                                    order=order,
+                                                    price=i['price'])
 
-            for day in i['days']:
-                day = Day.objects.create(
-                    day=datetime(2021, 1, 1),
-                    order=ord_detail
-                )
+            for day_string in i['days']:
+                date_format = datetime.strptime(day_string, '%d.%m.%Y')
+                day = Day.objects.create(day=date_format,
+                                         order=ord_detail)
         return order
-

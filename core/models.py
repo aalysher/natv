@@ -76,11 +76,12 @@ class OrderDetail(models.Model):
                                 on_delete=models.DO_NOTHING)
     price = models.FloatField()
 
+    def __str__(self):
+        return str(self.order)
+
 
 class Day(models.Model):
     order = models.ForeignKey(OrderDetail,
                               on_delete=models.DO_NOTHING)
     day = models.DateField()
 
-    def __str__(self):
-        return str(self.day)
