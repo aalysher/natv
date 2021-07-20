@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'natv.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite-natv',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'natv',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'localhost': '5000',
+        'PORT': '',
     }
 }
 
