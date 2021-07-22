@@ -9,10 +9,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import django_heroku
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -24,7 +26,7 @@ SECRET_KEY = 'django-insecure-fvauadag@@10%jj)e239xk&0y(h@4_+h8as8nk(h&+zgkv626h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['natvapp.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -73,14 +75,25 @@ WSGI_APPLICATION = 'natv.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'natv',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'localhost': '5000',
+#         'PORT': '',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'natv',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'localhost': '5000',
-        'PORT': '',
+        'NAME': 'dd6fecotakcjf9',
+        'USER': 'cvcrgofjkdxxgn',
+        'PASSWORD': '56f7cf68064b2bee321d959fca64ddc2d202a86feb6fd04947f30962c488707a',
+        'host': 'ec2-3-233-100-43.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -118,8 +131,9 @@ USE_TZ = True
 DATE_INPUT_FORMATS = '%Y-%M-%D'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+django_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
