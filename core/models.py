@@ -28,8 +28,8 @@ class Price(models.Model):
     channel = models.ForeignKey(Channel,
                                 on_delete=models.DO_NOTHING)
 
-    def __str__(self):
-        return self.price
+    # def __str__(self):
+    #     return self.price
 
 
 class Discount(models.Model):
