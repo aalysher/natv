@@ -1,25 +1,22 @@
-from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework import status, generics
 from rest_framework.response import Response
+from rest_framework.pagination import LimitOffsetPagination
 
-from core.models import Channel, Discount, Price
+from core.models import Channel
 from core.serializers import ChannelSerializer, OrderSerializer
 
 from .dto import get_channels_dto
 
 
-@api_view(['GET', 'POST'])
-def get_channels(request):
-    if request.method == 'GET':
-        channels = Channel.objects.filter(active=True)
-        channels_dto = get_channels_dto(channels)
-        serializer = ChannelSerializer(channels_dto, many=True)
-        return Response(serializer.data)
-    elif request.method == 'POST':
-        serializer = OrderSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data,
-                            status=status.HTTP_201_CREATED)
-        return Response(serializer.errors,
-                        status=status.HTTP_400_BAD_REQUEST)
+class ChannelList(generics.ListCreateAPIView):
+    queryset = get_channels_dto()
+    serializer_class = ChannelSerializer
+    pagination_class = LimitOffsetPagination
+
+    def get(self, request, *args, **kwargs):
+        ChannelList.serializer_class = ChannelSerializer
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        ChannelList.serializer_class = OrderSerializer
+        return self.create(request, *args, **kwargs)

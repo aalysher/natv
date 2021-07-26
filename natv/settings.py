@@ -75,27 +75,27 @@ WSGI_APPLICATION = 'natv.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'natv',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'localhost': '5000',
-#         'PORT': '',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dd6fecotakcjf9',
-        'USER': 'cvcrgofjkdxxgn',
-        'PASSWORD': '56f7cf68064b2bee321d959fca64ddc2d202a86feb6fd04947f30962c488707a',
-        'host': 'ec2-3-233-100-43.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'NAME': 'natv',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'localhost': '5000',
+        'PORT': '',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dd6fecotakcjf9',
+#         'USER': 'cvcrgofjkdxxgn',
+#         'PASSWORD': '56f7cf68064b2bee321d959fca64ddc2d202a86feb6fd04947f30962c488707a',
+#         'host': 'ec2-3-233-100-43.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

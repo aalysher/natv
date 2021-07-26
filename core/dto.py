@@ -5,7 +5,8 @@ class ChannelDto:
     pass
 
 
-def get_channels_dto(channels):
+def get_channels_dto():
+    channels = Channel.objects.filter(active=True)
     channels_list = []
     for channel in channels:
         channel_instance = ChannelDto()
