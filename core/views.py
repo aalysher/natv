@@ -10,7 +10,6 @@ from .dto import get_channels_dto
 
 class ChannelList(generics.ListCreateAPIView):
     queryset = get_channels_dto()
-    serializer_class = ChannelSerializer
     pagination_class = LimitOffsetPagination
 
     def get(self, request, *args, **kwargs):
